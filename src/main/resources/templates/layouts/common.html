@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!-- Common Header Fragment -->
+<div th:fragment="header">
+	<div align="center">
+		<h1>Merch Online</h1>
+	</div>
+	<div class="bs-example">
+		<nav class="navbar navbar-default">
+			<!-- Brand and toggle for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle" style="color:#706fd3; font-family:verdana;">
+					<span class="sr-only">Toggle Navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="#" class="navbar-brand">Blaut Home Studios</a>
+			</div>
+			<!-- Nav Links for toggling -->
+			<div id="navbarCollapse" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<!-- <li><a href="https://www.gcu.edu" target="_blank">Home</a></li> -->
+					<li><a href="login/">Login</a></li>
+					<li><a href="registration/">Register</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/">Start Page</a></li>
+				</ul>			
+			</div>
+		</nav>
+	</div>
+	
+	<!-- Page Title and Logo -->
+	<h2 th:text="${title}">Oops! something went wrong, content not found.</h2><br>
+	<img th:src="@{/images/tShirtLogo.png}"/><br/><br/>
+</div>
+
+<!-- Common Footer Fragment -->
+<div th:fragment="footer">
+	<h5 style="color:#706fd3; text-align: center; position: fixed; bottom: 0; width: 100%;">Copyright 2022 Blaut Home Studios</h5>
+</div>
+
+
+</html>
