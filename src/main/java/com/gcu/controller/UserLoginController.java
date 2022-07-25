@@ -2,6 +2,7 @@ package com.gcu.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,11 +10,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.gcu.business.ProductsBusinessInterface;
+import com.gcu.business.SecurityBusinessService;
 import com.gcu.model.User;
 
 @Controller
 @RequestMapping("/login")
 public class UserLoginController {
+	
+	@Autowired
+	ProductsBusinessInterface service;
+	
+	@Autowired
+	SecurityBusinessService security;
 	
 	@RequestMapping(value = "/", method= RequestMethod.GET)
 	public String displayLogin(Model model)
@@ -36,6 +45,8 @@ public class UserLoginController {
 			model.addAttribute("user", user);
 			return "login";
 		}
+		
+		model.addAttribute("products", service.getProducts());
 		
 		return "home";
 	}

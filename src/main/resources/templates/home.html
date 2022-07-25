@@ -6,7 +6,28 @@
 </head>
 <body>
 <div layout:fragment="content">
-Products Display
+<table>
+	<thead>
+		<tr>
+			<th style="text-align:center">Id Number</th>
+			<th style="text-align:center">Product Name</th>
+			<th style="text-align:center">Price</th>
+			<th style="text-align:center">Quantity</th>
+		<th>
+	</thead>
+	<tbody>
+		<tr th:if="${products.empty}">
+			<td style="text-align:center" colspan="4"> No Products Available </td>
+		</tr>
+		<tr th:each="product : ${products}">
+			<td style="text-align:center"><h5 th:text="${product.productNo}"></h5></td>
+			<td style="text-align:center"><h5 th:text="${product.productName}"></h5></td>
+			<td style="text-align:center"><h5 th:text="${product.price}"></h5></td>
+			<td style="text-align:center"><h5 th:text="${product.quantity}"></h5></td>
+		</tr>
+	</tbody>
+</table>
+<a href="../createProduct/">Create a New Product</a>
 </div>
 </body>
 </html>
