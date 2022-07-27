@@ -5,14 +5,14 @@ import javax.validation.constraints.Size;
 
 public class UserAccountModel {
 	
-	private int idNumber;
+	private Long idNumber;
 
 	@NotNull(message="First Name field cannot be empty!")
-	@Size(min=1, max=20, message="Your first name must be between 1 and 32 characters long!")
+	@Size(min=1, max=32, message="Your first name must be between 1 and 32 characters long!")
 	private String userFirstName;
 	
 	@NotNull(message="Last Name field cannot be empty!")
-	@Size(min=1, max=20, message="Your last name must be between 1 and 32 characters long!")
+	@Size(min=1, max=32, message="Your last name must be between 1 and 32 characters long!")
 	private String userLastName;
 	
 	@NotNull(message="Email field cannot be empty!")
@@ -50,11 +50,11 @@ public class UserAccountModel {
 	@Size(min=5, max=5, message="Your zipcode must be 5 characters long!")
 	private String userZip;
 
-	public int getIdNumber() {
+	public Long getIdNumber() {
 		return idNumber;
 	}
 
-	public void setIdNumber(int idNumber) {
+	public void setIdNumber(Long idNumber) {
 		this.idNumber = idNumber;
 	}
 

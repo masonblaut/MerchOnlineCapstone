@@ -6,7 +6,7 @@ import com.gcu.model.ProductModel;
 
 
 
-public interface ProductsBusinessInterface {
+public interface ProductBusinessInterface<T> {
 
 public void init();
 	
@@ -15,4 +15,6 @@ public void init();
 	public void test();
 
 	public List<ProductModel> getProducts();
+	
+	public boolean create(T t);
 }

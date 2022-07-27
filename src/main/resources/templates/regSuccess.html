@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+<head>
+<meta charset="ISO-8859-1">
+<title>Registration Success</title>
+</head>
+<body>
+<div layout:fragment="content">
+<h1 align="center">Registration Success!</h1><br/>
+<table style="width:75%">
+	<thead>
+		<tr>
+			<th style="text-align:center">ID:</th>
+			<th style="text-align:center">First Name:</th>
+			<th style="text-align:center">Last Name:</th>
+			<th style="text-align:center">Email:</th>
+			<th style="text-align:center">Username:</th>
+			<th style="text-align:center">Password:</th>
+			<th style="text-align:center">Phone Number:</th>
+			<th style="text-align:center">Address 1:</th>
+			<th style="text-align:center">Address 2:</th>
+			<th style="text-align:center">City:</th>
+			<th style="text-align:center">State:</th>
+			<th style="text-align:center">ZIP:</th>
+		<th>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center"><h5 th:text="${userAccountModel.idNumber}"></h5></td>
+			<td style="text-align:center"><h5 th:text="${userAccountModel.userFirstName}"></h5></td>
+			<td style="text-align:center"><h5 th:text="${userAccountModel.userLastName}"></h5></td>
+			<td style="text-align:center"><h5 th:text="${userAccountModel.userEmail}"></h5></td>
+			<td style="text-align:center"><h5 th:text="${userAccountModel.username}"></h5></td>
+			<td style="text-align:center"><h5 th:text="${userAccountModel.password}"></h5></td>
+			<td style="text-align:center"><h5 th:text="${userAccountModel.userPhoneNum}"></h5></td>
+			<td style="text-align:center"><h5 th:text="${userAccountModel.userAddress1}"></h5></td>
+			<td style="text-align:center"><h5 th:text="${userAccountModel.userAddress2}"></h5></td>
+			<td style="text-align:center"><h5 th:text="${userAccountModel.userCity}"></h5></td>
+			<td style="text-align:center"><h5 th:text="${userAccountModel.userState}"></h5></td>
+			<td style="text-align:center"><h5 th:text="${userAccountModel.userZip}"></h5></td>
+		</tr>
+	</tbody>
+</table>
+<br/>
+<a href="../../">Return to the Index</a>
+</div>
+</body>
+</html>

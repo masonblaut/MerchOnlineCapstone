@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.gcu.business.ProductsBusinessInterface;
+import com.gcu.business.ProductBusinessInterface;
 import com.gcu.business.SecurityBusinessService;
 import com.gcu.model.User;
 
@@ -19,7 +19,7 @@ import com.gcu.model.User;
 public class UserLoginController {
 	
 	@Autowired
-	ProductsBusinessInterface service;
+	ProductBusinessInterface service;
 	
 	@Autowired
 	SecurityBusinessService security;
@@ -36,7 +36,8 @@ public class UserLoginController {
 	@PostMapping("/doLogin")
 	public String doLogin(@Valid User user, BindingResult bindingResult, Model model)
 	{
-		System.out.println(String.format("Form with Username of %s and Password of %s", user.getUsername(), user.getPassword()));
+		
+		System.out.println("Attempting login of Username: " + user.getUsername() + "  Password: " + user.getPassword());
 		
 		if (bindingResult.hasErrors())
 		{
@@ -45,9 +46,13 @@ public class UserLoginController {
 			model.addAttribute("user", user);
 			return "login";
 		}
+		else if (security.authenticate(user.getUsername(), user.getPassword()))
+		{
+				model.addAttribute("products", service.getProducts());
+				return "home";
+		}
 		
-		model.addAttribute("products", service.getProducts());
-		
-		return "home";
+		model.addAttribute("title", "Not Authenticated! Try again:");
+		return "login";
 	}
 }
