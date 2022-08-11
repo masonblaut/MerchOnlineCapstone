@@ -49,8 +49,18 @@ public class ProductDataService implements DataAccessInterface<ProductEntity> {
 	}
 
 	@Override
-	public ProductEntity findById(int id) {
-		// TODO Auto-generated method stub
+	public ProductEntity findById(String id) {
+		
+		List<ProductEntity> products = findAll();
+		
+		for (ProductEntity entity : products)
+		{
+			//System.out.println("Security looking at: " + entity.getUsername()+ " " + entity.getPassword());
+			if(entity.getId().toString().equals(id))
+			{
+				return entity;
+			}
+		}
 		return null;
 	}
 
@@ -77,14 +87,43 @@ public class ProductDataService implements DataAccessInterface<ProductEntity> {
 
 	@Override
 	public boolean update(ProductEntity t) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		String sql = "UPDATE `products` SET `product_no` = ?, `product_name` = ?, `price` = ?, `quantity` = ? WHERE `products`.`id` = ?";
+		try
+		{
+			jdbcTemplateObject.update(sql,
+										t.getProductNo(),
+										t.getProductName(),
+										t.getPrice(),
+										t.getQuantity(),
+										t.getId()
+									);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public boolean delete(ProductEntity t) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		String sql = "DELETE FROM products WHERE `products`.`id` = ?";
+		try
+		{
+			jdbcTemplateObject.update(sql,
+										t.getId()
+									);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+		
 	}
 	
 }

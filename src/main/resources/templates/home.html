@@ -6,13 +6,16 @@
 </head>
 <body>
 <div layout:fragment="content">
-<table>
+<table style="width:90%">
 	<thead>
 		<tr>
-			<th style="text-align:center">Id Number</th>
+			<th style="text-align:center">Product No</th>
 			<th style="text-align:center">Product Name</th>
 			<th style="text-align:center">Price</th>
 			<th style="text-align:center">Quantity</th>
+			<th style="text-align:center">View</th>
+			<th style="text-align:center">Edit</th>
+			<th style="text-align:center">Delete</th>
 		<th>
 	</thead>
 	<tbody>
@@ -24,9 +27,14 @@
 			<td style="text-align:center"><h5 th:text="${product.productName}"></h5></td>
 			<td style="text-align:center"><h5 th:text="${product.price}"></h5></td>
 			<td style="text-align:center"><h5 th:text="${product.quantity}"></h5></td>
+			<td style="text-align:center"><a th:href="@{../productView(id=${product.id})}" style="color:green">View</a></td>
+			<td style="text-align:center"><a th:href="@{../productEdit(id=${product.id})}" style="color:yellow">Edit</a></td>
+			<td style="text-align:center"><a th:href="@{../productDelete(id=${product.id})}" style="color:red">Delete</a></td>
 		</tr>
 	</tbody>
 </table>
+<br/>
+<br/>
 <a href="../createProduct/">Create a New Product</a>
 </div>
 </body>

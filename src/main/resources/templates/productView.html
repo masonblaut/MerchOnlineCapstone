@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+<head>
+<meta charset="ISO-8859-1">
+<title>Product View</title>
+</head>
+<body>
+<div layout:fragment="content">
+<h1>Product Display:</h1>
+<table style="width:90%">
+	<thead>
+		<tr>
+			<th style="text-align:center">ID:</th>
+			<th style="text-align:center">Product No:</th>
+			<th style="text-align:center">Product Name:</th>
+			<th style="text-align:center">Price:</th>
+			<th style="text-align:center">Quantity:</th>
+		<th>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center"><h5 th:text="${productModel.id}"></h5></td>
+			<td style="text-align:center"><h5 th:text="${productModel.productNo}"></h5></td>
+			<td style="text-align:center"><h5 th:text="${productModel.productName}"></h5></td>
+			<td style="text-align:center"><h5 th:text="${productModel.price}"></h5></td>
+			<td style="text-align:center"><h5 th:text="${productModel.quantity}"></h5></td>
+		</tr>
+	</tbody>
+</table>
+
+</div>
+</body>
+</html>

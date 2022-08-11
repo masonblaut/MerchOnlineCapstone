@@ -7,6 +7,7 @@ import com.gcu.business.ProductBusinessInterface;
 import com.gcu.business.ProductBusinessService;
 import com.gcu.business.UserAccountBusinessInterface;
 import com.gcu.business.UserAccountBusinessService;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 
 
@@ -20,9 +21,8 @@ public class SpringConfig {
 	}
 	
 	@Bean(name="userAccountBusinessService")
-	public UserAccountBusinessInterface getUserAccounts()
+	public UserAccountBusinessService getUserAccountService()
 	{
 		return new UserAccountBusinessService();
 	}
-	
 }

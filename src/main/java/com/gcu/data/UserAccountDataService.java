@@ -30,7 +30,7 @@ public class UserAccountDataService implements DataAccessInterface<UserAccountEn
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 	
-	public UserAccountEntity findById(int id)
+	public UserAccountEntity findById(String id)
 	{
 		return null;
 	}
@@ -89,6 +89,19 @@ public class UserAccountDataService implements DataAccessInterface<UserAccountEn
 	public boolean delete(UserAccountEntity t) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public UserAccountEntity findByUsername(String username) {
+		
+		List<UserAccountEntity> accounts = findAll();
+		for (UserAccountEntity entity : accounts)
+		{
+			if(username.equals(entity.getUsername()))
+			{
+				return entity;
+			}
+		}
+		return null;
 	}
 	
 }

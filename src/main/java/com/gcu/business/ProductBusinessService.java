@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gcu.data.ProductDataService;
 import com.gcu.data.entity.ProductEntity;
+import com.gcu.data.entity.UserAccountEntity;
 import com.gcu.model.ProductModel;
 
 public class ProductBusinessService implements ProductBusinessInterface<ProductModel> {
@@ -19,6 +20,16 @@ public class ProductBusinessService implements ProductBusinessInterface<ProductM
 		System.out.println("OrdersBusinessService Test!!!");
 	}
 
+	public void init()
+	{
+		System.out.println("Init");
+	}
+
+	public void destroy()
+	{
+		System.out.println("Destroy");
+	}
+	
 	public List<ProductModel> getProducts() {
 		List<ProductEntity> entities = service.findAll();
 		
@@ -33,14 +44,30 @@ public class ProductBusinessService implements ProductBusinessInterface<ProductM
 		return products;
 	}
 	
-	public void init()
+	public ProductModel findProductById(String id)
 	{
-		System.out.println("Init");
+		ProductEntity entity = service.findById(id);
+		
+		if(entity != null)
+		{
+			return new ProductModel(entity.getId(), entity.getProductNo(), entity.getProductName(), entity.getPrice(), entity.getQuantity());
+		}
+		else
+			return null;
 	}
-
-	public void destroy()
+	
+	public boolean updateProduct(ProductModel product)
 	{
-		System.out.println("Destroy");
+		ProductEntity entity = new ProductEntity(product.getId(), product.getProductNo(), product.getProductName(), product.getPrice(), product.getQuantity());
+		
+		if (service.update(entity))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	public boolean create(ProductModel product) 
@@ -48,6 +75,19 @@ public class ProductBusinessService implements ProductBusinessInterface<ProductM
 		ProductEntity entity = new ProductEntity(product.getId(), product.getProductNo(), product.getProductName(), product.getPrice(), product.getQuantity());
 		
 		if (service.create(entity))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public boolean deleteProduct(ProductModel product) {
+		ProductEntity entity = new ProductEntity(product.getId(), product.getProductNo(), product.getProductName(), product.getPrice(), product.getQuantity());
+		
+		if (service.delete(entity))
 		{
 			return true;
 		}

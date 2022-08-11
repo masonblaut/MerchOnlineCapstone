@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.gcu.business.UserAccountBusinessInterface;
+import com.gcu.business.UserAccountBusinessService;
 import com.gcu.model.UserAccountModel;
 
 @Controller
@@ -18,7 +19,7 @@ import com.gcu.model.UserAccountModel;
 public class UserRegistrationController {
 	
 	@Autowired
-	UserAccountBusinessInterface service;
+	UserAccountBusinessService service;
 
 	@RequestMapping(value = "/", method= RequestMethod.GET)
 	public String displayRegistration(Model model)
