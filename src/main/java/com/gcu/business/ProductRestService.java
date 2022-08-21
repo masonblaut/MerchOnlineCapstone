@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gcu.model.ProductList;
 import com.gcu.model.ProductModel;
 
-
+/**
+ * RESTful API Service for Merch Online products.
+ * @author Mason Blaut
+ * @version 1.0
+ */
 @RestController
 @RequestMapping("/service")
 public class ProductRestService {
@@ -22,12 +26,19 @@ public class ProductRestService {
 	@Autowired
 	ProductBusinessInterface service;
 	
+	/**
+	 * Returns JSON Data for all Products by calling getProducts() from the ProductBusinessService.
+	 * @return List of ProductModel objects in JSON value format. 
+	 */
 	@GetMapping(path="/getjson", produces= {MediaType.APPLICATION_JSON_VALUE})
 	public List<ProductModel> getProductsAsJson()
 	{
 		return service.getProducts();
 	}
-	
+	/**
+	 * Returns XML Data for all Products by calling getProducts() from the ProductBusinessService.
+	 * @return List of ProductModel objects in XML value format.
+	 */
 	@GetMapping(path="/getxml", produces= {MediaType.APPLICATION_XML_VALUE})
 	public ProductList getProductsAsXml()
 	{
@@ -35,7 +46,11 @@ public class ProductRestService {
 		list.setOrders(service.getProducts());
 		return list;
 	}
-	
+	/**
+	 * Returns a ResponseEntity for a single product in JSON value format by calling findByProductId() from the ProductBusinessService with the id String parameter.
+	 * @param id used to findProductById()
+	 * @return ResponseEntity Generic.
+	 */
 	@GetMapping(path="/getproduct/{id}")
 	public ResponseEntity<?> getProduct(@PathVariable("id") String id)
 	{

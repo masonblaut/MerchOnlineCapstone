@@ -14,6 +14,11 @@ import com.gcu.data.entity.UserAccountEntity;
 import com.gcu.data.repository.ProductRepository;
 import com.gcu.model.ProductModel;
 
+/**
+ * Spring Service for Data Level Product access. Utilizes ProductRepository and JDBCTemplate for processing SQL statements.
+ * @author Mason Blaut
+ * @version 1.0
+ */
 @Service
 public class ProductDataService implements DataAccessInterface<ProductEntity> {
 
@@ -24,13 +29,20 @@ public class ProductDataService implements DataAccessInterface<ProductEntity> {
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
 	
+	/**
+	 * Constructor with fields
+	 * @param productRepository ProductRepository
+	 * @param dataSource DataSource defined in application.properties
+	 */
 	public ProductDataService(ProductRepository productRepository, DataSource dataSource)
 	{
 		this.productRepository = productRepository;
 		this.dataSource = dataSource;
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
-	
+	/**
+	 * Returns all products available in the database table by iterating through the ProductRepository.
+	 */
 	public List<ProductEntity> findAll() {
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
@@ -47,7 +59,11 @@ public class ProductDataService implements DataAccessInterface<ProductEntity> {
 		}
 		return products;
 	}
-
+	/**
+	 * Returns a ProductEntity object by looking through all products with a matching id String within a for loop.
+	 * @param id String to be searched for within allProducts for loop.
+	 * @return ProductEntity to be returned once found.
+	 */
 	@Override
 	public ProductEntity findById(String id) {
 		
@@ -63,7 +79,11 @@ public class ProductDataService implements DataAccessInterface<ProductEntity> {
 		}
 		return null;
 	}
-
+	/**
+	 * Attempts to create a new ProductEntity record within the database using the JdbcTemplate and a SQL INSERT statement.
+	 * @param t ProductEntity object to be created.
+	 * @return boolean: true upon successful record insertion, false otherwise.
+	 */
 	@Override
 	public boolean create(ProductEntity t) {
 		
@@ -84,7 +104,11 @@ public class ProductDataService implements DataAccessInterface<ProductEntity> {
 		}
 		return true;
 	}
-
+	/**
+	 * Attempts to update an existing ProductEntity record within the database using the JdbcTemplate and a SQL UPDATE statement.
+	 * @param t ProductEntity object to be updated.
+	 * @return boolean: true upon successful record update, false otherwise.
+	 */
 	@Override
 	public boolean update(ProductEntity t) {
 		
@@ -106,7 +130,11 @@ public class ProductDataService implements DataAccessInterface<ProductEntity> {
 		}
 		return true;
 	}
-
+	/**
+	 * Attempts to delete an existing ProductEntity record within the database using the JdbcTemplate and a SQL DELETE statement.
+	 * @param t ProductEntity object to be deleted.
+	 * @return boolean: true upon successful record deletion, false otherwise.
+	 */
 	@Override
 	public boolean delete(ProductEntity t) {
 		

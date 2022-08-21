@@ -14,6 +14,11 @@ import com.gcu.business.UserAccountBusinessInterface;
 import com.gcu.business.UserAccountBusinessService;
 import com.gcu.model.UserAccountModel;
 
+/**
+ * Spring Controller which displays the Registration view and utilizes the UserAccountBusinessService to create new User Account records in the database for authentication.
+ * @author Mason Blaut
+ * @version 1.0
+ */
 @Controller
 @RequestMapping("/registration")
 public class UserRegistrationController {
@@ -21,6 +26,11 @@ public class UserRegistrationController {
 	@Autowired
 	UserAccountBusinessService service;
 
+	/**
+	 * Displays the Registration view, which includes a form for new user accounts to be submitted.
+	 * @param model
+	 * @return registration.html
+	 */
 	@RequestMapping(value = "/", method= RequestMethod.GET)
 	public String displayRegistration(Model model)
 	{
@@ -29,7 +39,13 @@ public class UserRegistrationController {
 		//model.addAttribute("message", "Test Message");
 		return "registration";
 	}
-	
+	/**
+	 * Handles the submit button for the registration.html form.
+	 * @param userAccountModel the UserAccountModel to be created with create() from the UserAccountBusinessService.
+	 * @param bindingResult BindingResult from the registration form.
+	 * @param model
+	 * @return registration.html upon new account creation error and regSuccess.html upon successful account creation.
+	 */
 	@PostMapping("/doRegistration")
 	public String doRegistration(@Valid UserAccountModel userAccountModel, BindingResult bindingResult, Model model)
 	{

@@ -15,7 +15,11 @@ import com.gcu.business.UserAccountBusinessInterface;
 import com.gcu.business.UserAccountBusinessService;
 import com.gcu.data.entity.UserAccountEntity;
 
-
+/**
+ * Security Configuration Class for Merch Online
+ * @author Mason Blaut
+ * @version 1.0
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -27,12 +31,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	UserAccountBusinessService service;
 	
+	/**
+	 * setPassword Encoder
+	 * @return BCCryptPasswordEncoder
+	 */
 	@Bean
 	BCryptPasswordEncoder setPasswordEncoder()
 	{
 		return new BCryptPasswordEncoder();
 	}
 	
+	/**
+	 * Overrides configure for basic HTTP Authentication.
+	 * Security configuration protects web page and API access.
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception
 	{
@@ -42,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/service/**").authenticated()
 				.and()
 			.authorizeRequests()
-				.antMatchers("/", "/images/**", "/displayOauthCode").permitAll()
+				.antMatchers("/", "/registration", "/registration/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
@@ -60,7 +72,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.logoutSuccessUrl("/");
 	}
 	
-	
+	/**
+	 * Overrides configure to utilize WebSecurityManagerBuilder for password authentication and verification.
+	 */
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception
 	{
