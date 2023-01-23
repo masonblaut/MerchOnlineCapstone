@@ -36,6 +36,12 @@ public interface ProductBusinessInterface<T> {
 	 */
 	public ProductModel findProductById(String id);
 	/**
+	 * Returns a List of ProductModel Objects found by the productName String
+	 * @param productName ProductModel's productName String
+	 * @return List of matching ProductModels to be sent to the view controller.
+	 */
+	public List<ProductModel> findProductByProductName(String productName);
+	/**
 	 * Updates a ProductModel by passing a ProductModel to the Data Service. Returns a boolean upon completion.
 	 * @param product ProductModel with updated values.
 	 * @return boolean; true if the ProductModel was able to be edited and false if the operation from the data service failed.

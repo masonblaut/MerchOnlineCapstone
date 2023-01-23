@@ -11,10 +11,12 @@
 	<groupId>com.gcu</groupId>
 	<artifactId>MerchOnline</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>MerchOnline</name>
-	<description>MerchOnline Dynamic E-Commerce Web App</description>
+	<description>MerchOnline Backend Web App</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
+		<warname>MerchOnline</warname>
 	</properties>
 	<dependencies>
 		<dependency>

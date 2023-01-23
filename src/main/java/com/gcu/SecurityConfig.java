@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,9 +17,9 @@ import com.gcu.business.UserAccountBusinessService;
 import com.gcu.data.entity.UserAccountEntity;
 
 /**
- * Security Configuration Class for Merch Online
+ * Security Configuration Class for MerchOnline2
  * @author Mason Blaut
- * @version 1.0
+ * @version 2.0
  */
 @Configuration
 @EnableWebSecurity

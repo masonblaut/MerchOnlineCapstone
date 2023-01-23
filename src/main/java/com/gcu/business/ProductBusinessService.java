@@ -75,6 +75,28 @@ public class ProductBusinessService implements ProductBusinessInterface<ProductM
 			return null;
 	}
 	/**
+	 * Returns a list of ProductModel Objects found with the productName substring by the ProductDataService.
+	 * @param id ProductModel's id String
+	 * @return ProductModel to be sent to the view controller.
+	 */
+	public List<ProductModel> findProductByProductName(String productName)
+	{
+		List<ProductEntity> entities = service.findAll();
+		
+		List<ProductModel> products = new ArrayList<ProductModel>();
+		
+		for (ProductEntity entity : entities)
+		{
+			if (entity.getProductName().contains(productName))
+			{
+				ProductModel addProd = new ProductModel(entity.getId(), entity.getProductNo(), entity.getProductName(), entity.getPrice(), entity.getQuantity());
+				products.add(addProd);
+			}
+		}	
+		
+		return products;
+	}
+	/**
 	 * Updates a ProductModel by calling update() from the ProductDataService. Returns a boolean upon completion.
 	 * @param product ProductModel with updated values.
 	 * @return boolean; true if the ProductModel was able to be edited and false if the operation from the data service failed.
