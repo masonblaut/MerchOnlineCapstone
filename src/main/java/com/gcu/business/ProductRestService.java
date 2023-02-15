@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +20,9 @@ import com.gcu.model.ProductModel;
  * @author Mason Blaut
  * @version 1.0
  */
+@CrossOrigin
 @RestController
-@RequestMapping("/service")
+@RequestMapping("/service/products")
 public class ProductRestService {
 	
 	@Autowired
@@ -30,7 +32,7 @@ public class ProductRestService {
 	 * Returns JSON Data for all Products by calling getProducts() from the ProductBusinessService.
 	 * @return List of ProductModel objects in JSON value format. 
 	 */
-	@GetMapping(path="/getjson", produces= {MediaType.APPLICATION_JSON_VALUE})
+	@GetMapping(path="/", produces= {MediaType.APPLICATION_JSON_VALUE})
 	public List<ProductModel> getProductsAsJson()
 	{
 		return service.getProducts();
@@ -51,7 +53,7 @@ public class ProductRestService {
 	 * @param id used to findProductById()
 	 * @return ResponseEntity Generic.
 	 */
-	@GetMapping(path="/getproduct/{id}")
+	@GetMapping(path="/{id}")
 	public ResponseEntity<?> getProduct(@PathVariable("id") String id)
 	{
 		try
@@ -67,5 +69,25 @@ public class ProductRestService {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
+	/**
+	 * Returns a ResponseEntity for a single product in JSON value format by calling findByProductId() from the ProductBusinessService with the id String parameter.
+	 * @param id used to findProductById()
+	 * @return ResponseEntity Generic.
+	 */
+	@GetMapping(path="/search/productName/{phrase}")
+	public ResponseEntity<?> getProductByName(@PathVariable("phrase") String phrase)
+	{
+		try
+		{
+			List<ProductModel> order = service.findProductByProductName(phrase);
+			if(order.isEmpty())
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			else
+				return new ResponseEntity<>(order, HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }
