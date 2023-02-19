@@ -7,8 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +24,7 @@ import com.gcu.model.ProductModel;
  * @author Mason Blaut
  * @version 1.0
  */
-@CrossOrigin
+@CrossOrigin()
 @RestController
 @RequestMapping("/service/products")
 public class ProductRestService {
@@ -86,6 +90,54 @@ public class ProductRestService {
 				return new ResponseEntity<>(order, HttpStatus.OK);
 		}
 		catch(Exception e)
+		{
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping(path="/", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> createNewProduct(@RequestBody ProductModel product)
+	{
+		try
+		{
+			if(service.create(product))
+				return new ResponseEntity<>(product, HttpStatus.OK);
+			else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		catch(Exception e)
+		{
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PutMapping(path="/", consumes= MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> editProduct(@RequestBody ProductModel product)
+	{
+		try 
+		{
+			if(service.updateProduct(product))
+				return new ResponseEntity<>(product, HttpStatus.OK);
+			else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		catch (Exception e)
+		{
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping(path="/delete/", consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> deleteProduct(@RequestBody ProductModel product)
+	{
+		try
+		{
+			if(service.deleteProduct(product))
+				return new ResponseEntity<>(HttpStatus.OK);
+			else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		catch (Exception e)
 		{
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}

@@ -142,8 +142,7 @@ public class ProductDataService implements DataAccessInterface<ProductEntity> {
 		try
 		{
 			jdbcTemplateObject.update(sql,
-										t.getId()
-									);
+										t.getId());
 		}
 		catch (Exception e)
 		{
